@@ -1,8 +1,13 @@
 let datos = [];
 for (let i = -2000; i < 2001; i++) {
-    datos.push(i)
+    datos.push(i);
 }
-console.log(datos);
+
+const PDatos = document.getElementById("datos");
+const DivBusquedaBinaria = document.getElementById("busqueda_binaria");
+const DivBusquedaInterpolacion = document.getElementById(
+    "busqueda_interpolacion"
+);
 
 const ArregloOrdenado = (datos) => {
     if (datos != []) {
@@ -32,22 +37,33 @@ const ArregloOrdenado = (datos) => {
     }
 };
 
+PDatos.innerText = datos.join(", ");
+
 const BusquedaBinaria = (datos, numero) => {
+    DivBusquedaBinaria.innerHTML += `
+        <h3>Busqueda Binaria</h3>
+    `;
     if (!ArregloOrdenado(datos)) {
-        return;
+        return "Array no valido";
     }
     let min = 0;
     let max = datos.length - 1;
     let mitad = -1;
     while (true) {
         let mitad = Number(((min + max) / 2).toFixed(0));
-        console.log(datos.slice(min, max + 1));
+        DivBusquedaBinaria.innerHTML += `
+        <p>${datos.slice(min, max + 1).join(", ")}</p>
+        `;
         if (numero == datos[mitad]) {
-            console.log("El numero esta en la posicion", mitad);
+            DivBusquedaBinaria.innerHTML += `
+            <p>El numero esta en la posicion, ${mitad}</p>
+            `;
             return;
         }
         if (min >= max) {
-            console.log(`El numero ${numero} no esta en la lista`);
+            DivBusquedaBinaria.innerHTML += `
+            <p>El numero ${numero} no esta en la lista</p>
+            `;
             return;
         }
         if (datos[mitad] > numero) {
@@ -59,6 +75,9 @@ const BusquedaBinaria = (datos, numero) => {
 };
 
 const BusquedaInterpolacion = (datos, numero) => {
+    DivBusquedaInterpolacion.innerHTML = `
+        <h3>Busqueda por Interpolacion</h3>
+    `;
     if (!ArregloOrdenado(datos)) {
         return;
     }
@@ -73,13 +92,19 @@ const BusquedaInterpolacion = (datos, numero) => {
                     (datos[max] - datos[min])
                 ).toFixed(0)
         );
-        console.log(datos.slice(min, max + 1));
+        DivBusquedaInterpolacion.innerHTML += `
+        <p>${datos.slice(min, max + 1).join(", ")}</p>
+        `;
         if (min >= max || mitad >= max) {
-            console.log(`El numero ${numero} no esta en la lista`);
+            DivBusquedaInterpolacion.innerHTML += `
+            <p>El numero ${numero} no esta en la lista</p>
+            `;
             return;
         }
         if (numero == datos[mitad]) {
-            console.log("El numero esta en la posicion", mitad);
+            DivBusquedaInterpolacion.innerHTML += `
+            <p>El numero esta en la posicion, ${mitad}</p>
+            `;
             return;
         }
         if (datos[mitad] > numero) {
@@ -89,5 +114,6 @@ const BusquedaInterpolacion = (datos, numero) => {
         }
     }
 };
-BusquedaBinaria(datos,422)
-BusquedaInterpolacion(datos, 422)
+
+BusquedaBinaria(datos, 422);
+BusquedaInterpolacion(datos, 422);
