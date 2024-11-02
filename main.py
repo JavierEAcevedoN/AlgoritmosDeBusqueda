@@ -2,7 +2,7 @@ datos = list(range(-2000, 2002))
 
 def ArregloOrdenado(datos):
     if any(datos):
-        # Verifica que todos los datos de la lista sean iguales
+        # Verifica que todos los datos de la lista sean numeros
         for i in datos:
             if type(i) != type(0):
                 return False
@@ -26,6 +26,7 @@ def BusquedaBinaria(datos,numero):
         return
     min = 0
     max = len(datos)-1
+    mitad = -1
     while True:
         mitad = (min + max) // 2
         print(datos[min:max])
